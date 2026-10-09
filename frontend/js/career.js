@@ -1,7 +1,7 @@
 
 "use strict";
 
-const CAREERAI_API = "http://127.0.0.1:8000";
+const CAREERAI_API = "https://career-ai-7m8h.onrender.com";
 
 function getCareerToken() {
     return (
