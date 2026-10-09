@@ -1,8 +1,6 @@
-const API_BASE_URL = "http://127.0.0.1:8000/api";
-
+const API_BASE_URL = "https://career-ai-7m8h.onrender.com/api";
 
 async function apiRequest(endpoint, options = {}) {
-
     const token = localStorage.getItem("access_token");
 
     const headers = {
@@ -34,7 +32,6 @@ async function apiRequest(endpoint, options = {}) {
     }
 
     if (!response.ok) {
-
         if (response.status === 401) {
             localStorage.removeItem("access_token");
             localStorage.removeItem("user");
