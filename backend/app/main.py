@@ -65,16 +65,7 @@ app.add_middleware(
 # to communicate with FastAPI running on port 8000.
 # ============================================================
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://127.0.0.1:3000",
-        "http://localhost:3000",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 
 
 # Register API routes
