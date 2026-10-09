@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Account — CareerAI</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/auth.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="auth-page">
+
+    <!-- NAVBAR -->
+
+    <nav class="auth-nav">
+
+        <a
+            href="../index.html"
+            class="brand"
+        >
+
+            <span class="brand-icon">
+                ✦
+            </span>
+
+            CareerAI
+
+        </a>
+
+
+        <a
+            href="login.html"
+            class="nav-link"
+        >
+            Already have an account?
+            Sign in →
+        </a>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="auth-main">
+
+        <div class="auth-layout">
+
+
+            <!-- LEFT SIDE -->
+
+            <section class="auth-showcase">
+
+                <div class="ai-badge">
+                    🚀 Start your career journey
+                </div>
+
+
+                <h1>
+
+                    Build a career
+                    <span class="gradient-text">
+                        powered by AI.
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Create your CareerAI profile and let
+                    intelligent tools help you understand
+                    your skills, discover opportunities and
+                    prepare for your next interview.
+
+                </p>
+
+
+                <div class="benefits">
+
+                    <div class="benefit">
+
+                        <span class="benefit-icon">
+                            ✦
+                        </span>
+
+                        Understand your strongest skills
+
+                    </div>
+
+
+                    <div class="benefit">
+
+                        <span class="benefit-icon">
+                            ✦
+                        </span>
+
+                        Find jobs that fit your profile
+
+                    </div>
+
+
+                    <div class="benefit">
+
+                        <span class="benefit-icon">
+                            ✦
+                        </span>
+
+                        Discover your skill gaps
+
+                    </div>
+
+
+                    <div class="benefit">
+
+                        <span class="benefit-icon">
+                            ✦
+                        </span>
+
+                        Prepare smarter for interviews
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- REGISTER CARD -->
+
+            <section class="auth-card">
+
+                <div class="auth-card-header">
+
+                    <h2>
+                        Create your account
+                    </h2>
+
+                    <p>
+                        Join CareerAI and start building your next chapter.
+                    </p>
+
+                </div>
+
+
+                <form
+                    id="registerForm"
+                    class="auth-form"
+                >
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="name"
+                        >
+                            Full name
+                        </label>
+
+
+                        <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            class="form-input"
+                            placeholder="Darshan M"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="email"
+                        >
+                            Email address
+                        </label>
+
+
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            class="form-input"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="password"
+                        >
+                            Password
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                class="form-input password-input"
+                                placeholder="Create a strong password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('password', this)"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+
+                        <!-- PASSWORD STRENGTH -->
+
+                        <div
+                            id="passwordStrength"
+                            class="password-strength"
+                        >
+
+                            <div class="strength-bars">
+
+                                <span class="strength-bar"></span>
+                                <span class="strength-bar"></span>
+                                <span class="strength-bar"></span>
+                                <span class="strength-bar"></span>
+                                <span class="strength-bar"></span>
+
+                            </div>
+
+
+                            <span class="strength-text">
+                                Password strength
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="confirmPassword"
+                        >
+                            Confirm password
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <input
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                type="password"
+                                class="form-input password-input"
+                                placeholder="Repeat your password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('confirmPassword', this)"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="authMessage"
+                        class="auth-message"
+                    ></div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        id="registerButton"
+                        type="submit"
+                        class="auth-button"
+                    >
+                        Create my account →
+                    </button>
+
+
+                </form>
+
+
+                <div class="auth-divider">
+                    CAREERAI
+                </div>
+
+
+                <div class="auth-switch">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Sign in
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="auth-footer">
+
+        © 2026 CareerAI · AI-powered career intelligence
+
+    </footer>
+
+</div>
+
+
+<script src="../js/auth.js"></script>
+
+</body>
+
+</html>

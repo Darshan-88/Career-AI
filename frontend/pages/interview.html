@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Practice | CareerAI</title>
+    <link rel="stylesheet" href="../css/feature-pages.css">
+    <style>
+        .nav-actions { display:flex; gap:10px; flex-wrap:wrap; }
+        .nav-actions a {
+            display:inline-block; text-decoration:none; padding:10px 14px;
+            border:1px solid #dbe3ef; border-radius:10px; color:inherit;
+            font-weight:600; font-size:14px;
+        }
+        .nav-actions a:hover { background:#eef2ff; }
+        .question-card {
+            padding:18px; margin:14px 0; border:1px solid #dbe3ef;
+            border-radius:14px; background:rgba(255,255,255,.8);
+        }
+        .question-card p { line-height:1.65; }
+        .answer-area { width:100%; min-height:90px; box-sizing:border-box; }
+        .question-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+        .secondary-btn {
+            padding:10px 14px; border:1px solid #dbe3ef; border-radius:10px;
+            background:white; cursor:pointer; font-weight:600;
+        }
+        .primary-btn:disabled { opacity:.6; cursor:wait; }
+    </style>
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="../index.html">
+        <span class="brand-mark">✦</span> CareerAI
+    </a>
+    <nav class="nav-actions" aria-label="Page navigation">
+        <a href="dashboard.html">← Dashboard</a>
+        <a href="../index.html">⌂ Home</a>
+    </nav>
+</header>
+
+<main class="page">
+    <span class="eyebrow">Interview Studio</span>
+    <h1>Practise before the real interview.</h1>
+    <p class="lead">
+        Generate questions for your target role and practise answering them
+        with examples from your projects, internships and learning experience.
+    </p>
+
+    <section class="panel">
+        <h2>Configure your practice session</h2>
+        <form id="interviewForm">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="role">Target job role</label>
+                    <input id="role" required
+                           value="Python Backend Developer"
+                           placeholder="e.g. Data Analyst">
+                </div>
+
+                <div class="field full">
+                    <label for="skills">Relevant skills (comma-separated)</label>
+                    <textarea id="skills" required rows="3"
+                        placeholder="Python, SQL, FastAPI, REST API, Git">Python, SQL, FastAPI, REST API, Git</textarea>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="primary-btn" id="generateButton" type="submit">
+                    Generate Interview Questions
+                </button>
+            </div>
+        </form>
+
+        <div id="interviewStatus" class="status"
+             role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" id="interviewResults" hidden>
+        <h2>Your practice questions</h2>
+        <p class="muted">
+            Try answering aloud before writing your answer. Use examples
+            from your own projects whenever possible.
+        </p>
+        <div id="questionList"></div>
+        <div class="actions">
+            <button type="button" class="secondary-btn" id="printButton">
+                Print / Save Questions
+            </button>
+        </div>
+    </section>
+</main>
+
+<script>
+"use strict";
+
+const CAREERAI_API = "http://127.0.0.1:8000";
+
+function getToken() {
+    return localStorage.getItem("access_token")
+        || localStorage.getItem("token")
+        || localStorage.getItem("jwt");
+}
+
+function showStatus(message, type = "") {
+    const element = document.getElementById("interviewStatus");
+    element.textContent = message;
+    element.className = "status show" + (type ? " " + type : "");
+}
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[character]);
+}
+
+async function checkLogin() {
+    const token = getToken();
+
+    if (!token) {
+        window.location.replace("login.html");
+        return false;
+    }
+
+    try {
+        const response = await fetch(`${CAREERAI_API}/api/users/me`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("token");
+            localStorage.removeItem("jwt");
+            window.location.replace("login.html");
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error("Authentication check failed:", error);
+        showStatus("Cannot connect to CareerAI. Start the backend and refresh.", "error");
+        return false;
+    }
+}
+
+document.getElementById("interviewForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const button = document.getElementById("generateButton");
+    button.disabled = true;
+    showStatus("Generating questions…");
+
+    try {
+        const token = getToken();
+        const role = document.getElementById("role").value.trim();
+        const skills = document.getElementById("skills").value
+            .split(/[,\n]/)
+            .map(skill => skill.trim())
+            .filter(Boolean);
+
+        if (!role || skills.length === 0) {
+            showStatus("Enter a target role and at least one skill.", "error");
+            return;
+        }
+
+        const response = await fetch(`${CAREERAI_API}/api/interviews/generate`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({ role, skills })
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(data.detail || `Request failed (${response.status})`);
+        }
+
+        const questions = Array.isArray(data.questions) ? data.questions : [];
+
+        const list = document.getElementById("questionList");
+
+        if (questions.length === 0) {
+            list.innerHTML = "<p>No questions were returned. Try another role or skill set.</p>";
+        } else {
+            list.innerHTML = questions.map((item, index) => {
+                const question = typeof item === "string"
+                    ? item
+                    : (item.question || item.text || JSON.stringify(item));
+
+                return `
+                    <article class="question-card">
+                        <h3>Question ${index + 1}</h3>
+                        <p>${escapeHTML(question)}</p>
+                        <label for="answer-${index}">Your practice answer</label>
+                        <textarea class="answer-area" id="answer-${index}"
+                            rows="4"
+                            placeholder="Write your answer here. Use an example from a project or internship."></textarea>
+                        <div class="question-actions">
+                            <button type="button" class="secondary-btn"
+                                data-copy-answer="${index}">
+                                Copy My Answer
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }).join("");
+        }
+
+        document.getElementById("interviewResults").hidden = false;
+        showStatus(`Generated ${questions.length} question(s) for ${role}.`, "success");
+
+        document.getElementById("interviewResults").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    } catch (error) {
+        console.error("Interview question generation failed:", error);
+        showStatus(
+            error.message || "Could not generate questions. Please try again.",
+            "error"
+        );
+    } finally {
+        button.disabled = false;
+    }
+});
+
+document.getElementById("questionList").addEventListener("click", async event => {
+    const button = event.target.closest("[data-copy-answer]");
+    if (!button) return;
+
+    const index = button.dataset.copyAnswer;
+    const answer = document.getElementById(`answer-${index}`).value;
+
+    if (!answer.trim()) {
+        showStatus("Write an answer before copying it.", "error");
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(answer);
+        showStatus("Your answer was copied.", "success");
+    } catch (error) {
+        showStatus("Clipboard access failed. Select and copy your answer manually.", "error");
+    }
+});
+
+document.getElementById("printButton").addEventListener("click", () => {
+    window.print();
+});
+
+document.addEventListener("DOMContentLoaded", checkLogin);
+</script>
+</body>
+</html>

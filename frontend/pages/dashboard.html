@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | CareerAI</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-page">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="dashboard-header">
+
+        <div class="header-left">
+
+            <div
+                class="brand"
+                onclick="openPage('dashboard.html')"
+                style="cursor:pointer;"
+            >
+
+                <div class="brand-icon">
+                    ✦
+                </div>
+
+                <span class="brand-name">
+                    CareerAI
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <span
+                id="userName"
+                class="user-name"
+            >
+                Loading...
+            </span>
+
+            <button
+                class="logout-btn"
+                onclick="logoutUser()"
+            >
+                Logout
+            </button>
+            
+                <a href="../index.html" class="home-button">⌂ Home</a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="dashboard-container">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="dashboard-hero">
+
+
+            <div class="hero-badge">
+
+                ✨ AI Career Intelligence
+
+            </div>
+
+
+            <h1>
+
+                Welcome back,
+
+                <span
+                    id="welcomeName"
+                    class="gradient-text"
+                >
+                    Career Explorer
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Your AI-powered career workspace is ready.
+                Analyze your resume, discover relevant jobs,
+                identify skill gaps and prepare for your next
+                opportunity.
+
+            </p>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <section class="stats-grid">
+
+
+            <!-- Resume Score -->
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Resume Score
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="resumeScore"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+
+            <!-- Job Matches -->
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Job Matches
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="jobMatches"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+
+            <!-- Skills -->
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Skills Identified
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="skillsIdentified"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+
+            <!-- Applications -->
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Applications
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="applicationsCount"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CAREER INTELLIGENCE
+        ================================================== -->
+
+        <section class="career-intelligence-section">
+
+
+            <h2 class="section-title">
+                Your Career Intelligence
+            </h2>
+
+
+            <div
+                class="section-description"
+                style="
+                    margin-top:-18px;
+                    margin-bottom:30px;
+                    color:#64748b;
+                "
+            >
+
+                Everything you need to understand your
+                profile, discover opportunities and
+                build your career.
+
+            </div>
+
+
+
+            <div class="feature-grid">
+
+                <!-- ADMIN-ONLY POST JOB CARD -->
+<div
+    class="feature-card admin-only"
+    onclick="openPage('post-job.html')"
+    style="display: none;"
+>
+    <div class="feature-icon">🛡️</div>
+
+    <h3>Post a Job</h3>
+
+    <p>
+        Publish job opportunities and manage recruitment
+        listings as a CareerAI administrator.
+    </p>
+
+    <span class="feature-arrow">→</span>
+</div>
+
+
+
+
+                <!-- =================================================
+                     RESUME INTELLIGENCE
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('resume.html')"
+                >
+
+                    <div class="feature-icon">
+                        📄
+                    </div>
+
+                    <h3>
+                        Resume Intelligence
+                    </h3>
+
+                    <p>
+                        Upload your resume and let AI analyze
+                        your skills, experience, strengths and
+                        improvement areas.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     JOB MATCHING
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('jobs.html')"
+                >
+
+                    <div class="feature-icon">
+                        💼
+                    </div>
+
+                    <h3>
+                        Smart Job Matching
+                    </h3>
+
+                    <p>
+                        Find jobs that match your skills and
+                        understand exactly why each opportunity
+                        fits you.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     CAREER ROADMAP
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('career.html')"
+                >
+
+                    <div class="feature-icon">
+                        🚀
+                    </div>
+
+                    <h3>
+                        Career Roadmap
+                    </h3>
+
+                    <p>
+                        Get a personalized roadmap showing the
+                        skills and technologies you should learn
+                        next.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     INTERVIEW COACH
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('interview.html')"
+                >
+
+                    <div class="feature-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        AI Interview Coach
+                    </h3>
+
+                    <p>
+                        Practice technical and HR interview
+                        questions generated specifically for
+                        your target role.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SKILL GAP
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('career.html')"
+                >
+
+                    <div class="feature-icon">
+                        🧠
+                    </div>
+
+                    <h3>
+                        Skill Gap Intelligence
+                    </h3>
+
+                    <p>
+                        See exactly which skills you are missing
+                        for your target role and what you should
+                        learn next.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     RESUME OPTIMIZER
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('resume.html')"
+                >
+
+                    <div class="feature-icon">
+                        ✍️
+                    </div>
+
+                    <h3>
+                        Resume Optimizer
+                    </h3>
+
+                    <p>
+                        Get AI-powered recommendations to make
+                        your resume stronger and more relevant
+                        to your target role.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     APPLICATION TRACKER
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('applications.html')"
+                >
+
+                    <div class="feature-icon">
+                        📊
+                    </div>
+
+                    <h3>
+                        Application Tracker
+                    </h3>
+
+                    <p>
+                        Keep your job applications organized and
+                        track every stage of your recruitment
+                        journey.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     CAREER ADVISOR
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('career.html')"
+                >
+
+                    <div class="feature-icon">
+                        💡
+                    </div>
+
+                    <h3>
+                        AI Career Advisor
+                    </h3>
+
+                    <p>
+                        Ask AI career questions and receive
+                        personalized recommendations based on
+                        your profile.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     INTERVIEW PREPARATION
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('interview.html')"
+                >
+
+                    <div class="feature-icon">
+                        🎤
+                    </div>
+
+                    <h3>
+                        Interview Preparation
+                    </h3>
+
+                    <p>
+                        Prepare for technical, behavioral and
+                        HR interviews with targeted questions
+                        and practice sessions.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     JOB INTELLIGENCE
+                ================================================== -->
+
+                <div
+                    class="feature-card"
+                    onclick="openPage('jobs.html')"
+                >
+
+                    <div class="feature-icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Job Intelligence
+                    </h3>
+
+                    <p>
+                        Understand job requirements, required
+                        skills and how closely your profile
+                        matches each opportunity.
+                    </p>
+
+                    <span class="feature-arrow">
+                        →
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             QUICK ACTION
+        ================================================== -->
+
+        <section class="quick-section">
+
+
+            <div class="quick-content">
+
+                <h2>
+                    Ready to improve your career?
+                </h2>
+
+                <p>
+                    Start by uploading your resume and discover
+                    your AI-generated career insights.
+                </p>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="openPage('resume.html')"
+            >
+
+                Analyze My Resume →
+
+            </button>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONTACT
+        ================================================== -->
+
+        <section class="contact-section">
+
+
+            <div class="contact-content">
+
+
+                <div class="hero-badge">
+
+                    ✦ Let's connect
+
+                </div>
+
+
+                <h2>
+                    Have a question?
+                </h2>
+
+
+                <p>
+
+                    Feel free to reach out if you have questions,
+                    feedback or suggestions about CareerAI.
+
+                </p>
+
+
+                <div class="contact-details">
+
+
+                    <!-- Developer -->
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            👤
+                        </div>
+
+                        <div>
+
+                            <small>
+                                Developer
+                            </small>
+
+                            <strong>
+                                Darshan M
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Email -->
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            ✉
+                        </div>
+
+                        <div>
+
+                            <small>
+                                Email
+                            </small>
+
+                            <a
+                                href="mailto:darshan712871@gmail.com"
+                            >
+                                darshan712871@gmail.com
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="dashboard-footer">
+
+
+        <div class="footer-brand">
+
+            <div class="brand-icon">
+                ✦
+            </div>
+
+            <span>
+                CareerAI
+            </span>
+
+        </div>
+
+
+        <p>
+            AI-powered career intelligence platform.
+        </p>
+
+
+        <p class="footer-copy">
+            © 2026 CareerAI. Built by Darshan M.
+        </p>
+
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+
+
+<script src="../js/dashboard.js"></script>
+
+
+</body>
+
+</html>

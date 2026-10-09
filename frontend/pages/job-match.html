@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Job Match Intelligence | CareerAI</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/job-match.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header class="jm-navbar">
+
+        <a
+            href="../index.html"
+            class="jm-brand"
+        >
+
+            <span class="jm-brand-icon">
+                ✦
+            </span>
+
+            <span>
+                CareerAI
+            </span>
+
+        </a>
+
+
+        <a
+            href="dashboard.html"
+            class="jm-dashboard-btn"
+        >
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN PAGE
+    ====================================================== -->
+
+    <main class="jm-page">
+
+        <!-- HERO -->
+
+        <section class="jm-hero">
+
+            <div class="jm-badge">
+                ✨ AI Job Intelligence
+            </div>
+
+            <h1>
+                Find out how well your
+                <span>resume matches.</span>
+            </h1>
+
+            <p>
+                Upload your resume and any external job description.
+                CareerAI will compare the requirements with your
+                skills and show exactly where you stand.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             UPLOAD CARD
+        ================================================== -->
+
+        <section class="jm-card">
+
+            <div class="jm-card-header">
+
+                <div>
+                    <span class="jm-eyebrow">
+                        JOB MATCH ANALYSIS
+                    </span>
+
+                    <h2>
+                        Compare your resume with a job
+                    </h2>
+
+                    <p>
+                        Upload both files to get an AI-powered
+                        compatibility score.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- UPLOAD GRID -->
+
+            <div class="jm-upload-grid">
+
+
+                <!-- RESUME -->
+
+                <div class="jm-upload-box">
+
+                    <div class="jm-upload-icon">
+                        📄
+                    </div>
+
+                    <h3>
+                        Your Resume
+                    </h3>
+
+                    <p>
+                        Upload your current resume
+                    </p>
+
+                    <button
+                        type="button"
+                        class="jm-upload-button"
+                        id="resumeChooseButton"
+                    >
+                        Choose Resume
+                    </button>
+
+                    <input
+                        type="file"
+                        id="resumeFile"
+                        accept=".pdf,.docx,.txt"
+                        hidden
+                    >
+
+                    <div
+                        class="jm-selected-file"
+                        id="resumeFileName"
+                    >
+                        No file selected
+                    </div>
+
+                </div>
+
+
+                <!-- JOB DESCRIPTION -->
+
+                <div class="jm-upload-box">
+
+                    <div class="jm-upload-icon jm-jd-icon">
+                        💼
+                    </div>
+
+                    <h3>
+                        Job Description
+                    </h3>
+
+                    <p>
+                        Upload the job description
+                    </p>
+
+                    <button
+                        type="button"
+                        class="jm-upload-button"
+                        id="jobChooseButton"
+                    >
+                        Choose Job Description
+                    </button>
+
+                    <input
+                        type="file"
+                        id="jobDescriptionFile"
+                        accept=".pdf,.docx,.txt"
+                        hidden
+                    >
+
+                    <div
+                        class="jm-selected-file"
+                        id="jobFileName"
+                    >
+                        No file selected
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="jmStatus"
+                class="jm-status"
+            ></div>
+
+
+            <!-- ANALYZE BUTTON -->
+
+            <button
+                type="button"
+                id="analyzeJobButton"
+                class="jm-analyze-button"
+            >
+                <span>✨</span>
+                Analyze Job Match
+                <span>→</span>
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             RESULT SECTION
+        ================================================== -->
+
+        <section
+            id="jobMatchResult"
+            class="jm-results hidden"
+        >
+
+            <div class="jm-result-header">
+
+                <span class="jm-badge">
+                    ✨ AI Analysis Complete
+                </span>
+
+                <h2>
+                    Your Job Match Intelligence
+                </h2>
+
+                <p id="resultSummary">
+                    CareerAI compared your resume against
+                    the uploaded job description.
+                </p>
+
+            </div>
+
+
+            <!-- SCORE -->
+
+            <div class="jm-score-card">
+
+                <div class="jm-score-ring">
+
+                    <div class="jm-score-inner">
+
+                        <strong id="matchScore">
+                            0%
+                        </strong>
+
+                        <span>
+                            Match
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="jm-score-content">
+
+                    <span class="jm-score-label">
+                        CAREER COMPATIBILITY
+                    </span>
+
+                    <h3 id="scoreMessage">
+                        Analyzing your match...
+                    </h3>
+
+                    <p>
+                        Your score is calculated from the
+                        recognizable skills found in your
+                        resume and job description.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SKILLS GRID -->
+
+            <div class="jm-results-grid">
+
+
+                <!-- MATCHED -->
+
+                <div class="jm-result-card">
+
+                    <div class="jm-result-title">
+                        <span class="jm-result-icon success">
+                            ✓
+                        </span>
+
+                        <h3>
+                            Matching Skills
+                        </h3>
+                    </div>
+
+                    <div
+                        id="matchedSkills"
+                        class="jm-skills"
+                    ></div>
+
+                </div>
+
+
+                <!-- MISSING -->
+
+                <div class="jm-result-card">
+
+                    <div class="jm-result-title">
+
+                        <span class="jm-result-icon warning">
+                            !
+                        </span>
+
+                        <h3>
+                            Skills to Improve
+                        </h3>
+
+                    </div>
+
+                    <div
+                        id="missingSkills"
+                        class="jm-skills"
+                    ></div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ALL RESUME SKILLS -->
+
+            <div class="jm-result-card jm-full-card">
+
+                <div class="jm-result-title">
+
+                    <span class="jm-result-icon purple">
+                        ✦
+                    </span>
+
+                    <h3>
+                        Resume Skills
+                    </h3>
+
+                </div>
+
+                <div
+                    id="resumeSkills"
+                    class="jm-skills"
+                ></div>
+
+            </div>
+
+
+            <!-- JOB SKILLS -->
+
+            <div class="jm-result-card jm-full-card">
+
+                <div class="jm-result-title">
+
+                    <span class="jm-result-icon blue">
+                        💼
+                    </span>
+
+                    <h3>
+                        Job Requirements Identified
+                    </h3>
+
+                </div>
+
+                <div
+                    id="jobSkills"
+                    class="jm-skills"
+                ></div>
+
+            </div>
+
+
+            <!-- RECOMMENDATIONS -->
+
+            <div class="jm-recommendation-card">
+
+                <div class="jm-recommendation-heading">
+
+                    <span>
+                        ✨
+                    </span>
+
+                    <div>
+
+                        <span class="jm-eyebrow">
+                            CAREERAI RECOMMENDATION
+                        </span>
+
+                        <h3>
+                            What you should improve
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <ul
+                    id="recommendationList"
+                    class="jm-recommendations"
+                ></ul>
+
+            </div>
+
+
+            <!-- ANALYZE AGAIN -->
+
+            <button
+                type="button"
+                id="analyzeAgainButton"
+                class="jm-secondary-button"
+            >
+                ← Analyze another job
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="../js/job-match.js"></script>
+
+</body>
+
+</html>

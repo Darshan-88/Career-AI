@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resume Intelligence | CareerAI</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           RESUME AI PAGE
+        ===================================================== */
+
+        .resume-page {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(37, 99, 235, 0.10),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 5%,
+                    rgba(124, 58, 237, 0.09),
+                    transparent 30%
+                ),
+                #f8fafc;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .resume-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background:
+                rgba(255, 255, 255, 0.88);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            border-bottom:
+                1px solid
+                rgba(226, 232, 240, 0.8);
+        }
+
+        .resume-nav-inner {
+            width:
+                min(
+                    1200px,
+                    calc(100% - 40px)
+                );
+
+            height: 76px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .resume-brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-family:
+                "Manrope",
+                sans-serif;
+
+            font-size: 1.25rem;
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .resume-brand-icon {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 12px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 10px 25px
+                rgba(37, 99, 235, 0.22);
+        }
+
+        .resume-nav-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .resume-back-btn {
+            padding:
+                10px
+                17px;
+
+            border-radius: 11px;
+
+            color:
+                var(--text-secondary);
+
+            background:
+                white;
+
+            border:
+                1px solid
+                var(--border);
+
+            cursor: pointer;
+
+            font-size: 0.88rem;
+
+            font-weight: 600;
+        }
+
+        .resume-back-btn:hover {
+            color:
+                var(--primary);
+
+            border-color:
+                var(--primary-light);
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .resume-container {
+            width:
+                min(
+                    1050px,
+                    calc(100% - 40px)
+                );
+
+            margin: 0 auto;
+
+            padding:
+                80px
+                0
+                100px;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .resume-hero {
+            text-align: center;
+
+            max-width: 850px;
+
+            margin:
+                0 auto
+                55px;
+        }
+
+        .resume-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                8px
+                15px;
+
+            margin-bottom: 22px;
+
+            border-radius: 999px;
+
+            color:
+                var(--primary);
+
+            background:
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.07
+                );
+
+            border:
+                1px solid
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.14
+                );
+
+            font-size: 0.82rem;
+
+            font-weight: 650;
+        }
+
+        .resume-hero h1 {
+            font-size:
+                clamp(
+                    2.7rem,
+                    5vw,
+                    4.4rem
+                );
+
+            letter-spacing:
+                -0.055em;
+
+            margin-bottom: 22px;
+        }
+
+        .resume-gradient {
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+        .resume-hero p {
+            max-width: 680px;
+
+            margin: 0 auto;
+
+            color:
+                var(--text-secondary);
+
+            font-size: 1.05rem;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
+
+        .resume-card {
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.92
+                );
+
+            border:
+                1px solid
+                rgba(
+                    226,
+                    232,
+                    240,
+                    0.95
+                );
+
+            border-radius:
+                28px;
+
+            padding:
+                38px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.08
+                );
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .resume-form {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 28px;
+        }
+
+        .resume-form-group {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+        }
+
+        .resume-label {
+            font-size: 0.9rem;
+
+            font-weight: 700;
+
+            color:
+                var(--text-primary);
+        }
+
+        .resume-help {
+            color:
+                var(--text-muted);
+
+            font-size: 0.78rem;
+        }
+
+        .resume-select {
+            width: 100%;
+
+            padding:
+                14px
+                15px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                12px;
+
+            outline: none;
+
+            background:
+                white;
+
+            color:
+                var(--text-primary);
+
+            cursor: pointer;
+
+            transition:
+                border
+                var(--transition-fast),
+                box-shadow
+                var(--transition-fast);
+        }
+
+        .resume-select:focus {
+            border-color:
+                var(--primary);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.10
+                );
+        }
+
+
+        /* =====================================================
+           UPLOAD ZONE
+        ===================================================== */
+
+        .resume-upload-zone {
+            position: relative;
+
+            min-height: 250px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 35px;
+
+            border:
+                2px dashed
+                #cbd5e1;
+
+            border-radius:
+                20px;
+
+            background:
+                #f8fafc;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition:
+                border-color
+                0.25s ease,
+                background
+                0.25s ease,
+                transform
+                0.25s ease;
+        }
+
+        .resume-upload-zone:hover {
+            border-color:
+                var(--primary);
+
+            background:
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.035
+                );
+
+            transform:
+                translateY(-2px);
+        }
+
+        .resume-upload-zone.dragging {
+            border-color:
+                var(--primary);
+
+            background:
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.06
+                );
+        }
+
+        .upload-icon-large {
+            width: 68px;
+
+            height: 68px;
+
+            display: grid;
+
+            place-items: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef2ff,
+                    #e0e7ff
+                );
+
+            color:
+                var(--primary);
+
+            font-size: 1.7rem;
+        }
+
+        .resume-upload-zone h3 {
+            margin-bottom: 8px;
+
+            font-size: 1.15rem;
+        }
+
+        .resume-upload-zone p {
+            margin-bottom: 16px;
+
+            color:
+                var(--text-muted);
+
+            font-size: 0.88rem;
+        }
+
+        .choose-file-btn {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding:
+                10px
+                17px;
+
+            border: none;
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.08
+                );
+
+            color:
+                var(--primary);
+
+            font-size: 0.85rem;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                0.2s ease;
+        }
+
+        .choose-file-btn:hover {
+            background:
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.14
+                );
+
+            transform:
+                translateY(-1px);
+        }
+
+        #resumeFile {
+            display: none;
+        }
+
+
+        /* =====================================================
+           FILE NAME
+        ===================================================== */
+
+        .selected-file {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            min-height: 52px;
+
+            padding:
+                12px
+                15px;
+
+            border-radius:
+                12px;
+
+            background:
+                #f8fafc;
+
+            border:
+                1px solid
+                var(--border);
+
+            color:
+                var(--text-secondary);
+
+            font-size:
+                0.88rem;
+        }
+
+        .selected-file-icon {
+            width: 34px;
+
+            height: 34px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius:
+                9px;
+
+            background:
+                #eef2ff;
+
+            color:
+                var(--primary);
+        }
+
+
+        /* =====================================================
+           ANALYZE BUTTON
+        ===================================================== */
+
+        .analyze-btn {
+            width: 100%;
+
+            min-height: 54px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            border: none;
+
+            border-radius:
+                13px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            box-shadow:
+                0 14px 30px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.22
+                );
+
+            font-size: 0.95rem;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform
+                0.2s ease,
+                box-shadow
+                0.2s ease,
+                opacity
+                0.2s ease;
+        }
+
+        .analyze-btn:hover {
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 18px 38px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.30
+                );
+        }
+
+        .analyze-btn:disabled {
+            cursor: wait;
+
+            opacity: 0.65;
+
+            transform: none;
+        }
+
+
+        /* =====================================================
+           STATUS
+        ===================================================== */
+
+        #uploadStatus {
+            min-height: 24px;
+
+            text-align: center;
+
+            font-size: 0.88rem;
+
+            font-weight: 600;
+        }
+
+        .text-success {
+            color:
+                var(--success);
+        }
+
+        .text-danger {
+            color:
+                var(--danger);
+        }
+
+        .text-muted {
+            color:
+                var(--text-muted);
+        }
+
+
+        /* =====================================================
+           RESULT SECTION
+        ===================================================== */
+
+        #resultSection {
+            margin-top: 55px;
+
+            animation:
+                result-in
+                0.45s
+                ease
+                both;
+        }
+
+        #resultSection.hidden {
+            display: none;
+        }
+
+        @keyframes result-in {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+        .result-header {
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+        .result-header h2 {
+            margin-bottom: 9px;
+        }
+
+        .result-header p {
+            color:
+                var(--text-secondary);
+        }
+
+
+        /* =====================================================
+           SCORE
+        ===================================================== */
+
+        .result-score-card {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding:
+                35px;
+
+            margin-bottom:
+                22px;
+
+            border-radius:
+                22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #f5f3ff
+                );
+
+            border:
+                1px solid
+                #dce5ff;
+        }
+
+        .score-circle {
+            width: 145px;
+
+            height: 145px;
+
+            display: grid;
+
+            place-items: center;
+
+            position: relative;
+
+            border-radius: 50%;
+
+            background:
+                conic-gradient(
+                    #2563eb
+                    0deg
+                    313deg,
+                    #dbe4f5
+                    313deg
+                    360deg
+                );
+        }
+
+        .score-circle::before {
+            content: "";
+
+            position: absolute;
+
+            width: 112px;
+
+            height: 112px;
+
+            border-radius: 50%;
+
+            background:
+                white;
+        }
+
+        #resumeScore {
+            position: relative;
+
+            z-index: 2;
+
+            font-family:
+                "Manrope",
+                sans-serif;
+
+            font-size:
+                2rem;
+
+            font-weight:
+                800;
+
+            color:
+                var(--text-primary);
+        }
+
+        .score-title {
+            margin-top:
+                17px;
+
+            font-weight:
+                700;
+
+            color:
+                var(--text-primary);
+        }
+
+
+        /* =====================================================
+           RESULT GRID
+        ===================================================== */
+
+        .result-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+
+            gap: 22px;
+        }
+
+        .result-card {
+            padding:
+                26px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                20px;
+
+            background:
+                white;
+
+            box-shadow:
+                var(--shadow-sm);
+        }
+
+        .result-card h3 {
+            margin-bottom:
+                17px;
+
+            font-size:
+                1.05rem;
+        }
+
+        .skill-list {
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap: 8px;
+        }
+
+        .skill-tag {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            padding:
+                7px
+                11px;
+
+            border-radius:
+                999px;
+
+            color:
+                var(--primary);
+
+            background:
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.08
+                );
+
+            font-size:
+                0.76rem;
+
+            font-weight:
+                650;
+        }
+
+        .skill-tag.missing {
+            color:
+                var(--danger);
+
+            background:
+                rgba(
+                    239,
+                    68,
+                    68,
+                    0.08
+                );
+        }
+
+
+        /* =====================================================
+           RECOMMENDATIONS
+        ===================================================== */
+
+        .recommendation-card {
+            grid-column:
+                1 / -1;
+        }
+
+        #recommendationList {
+            margin: 0;
+
+            padding-left:
+                20px;
+        }
+
+        #recommendationList li {
+            margin-bottom:
+                12px;
+
+            color:
+                var(--text-secondary);
+
+            line-height:
+                1.7;
+        }
+
+
+        /* =====================================================
+           ROLE
+        ===================================================== */
+
+        .role-display {
+            margin-top:
+                6px;
+
+            color:
+                var(--primary);
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 750px) {
+
+            .resume-container {
+
+                width:
+                    calc(
+                        100% - 28px
+                    );
+
+                padding:
+                    55px
+                    0
+                    70px;
+            }
+
+            .resume-card {
+
+                padding:
+                    22px;
+            }
+
+            .resume-hero h1 {
+
+                font-size:
+                    2.7rem;
+            }
+
+            .result-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .recommendation-card {
+
+                grid-column:
+                    auto;
+            }
+
+            .resume-nav-inner {
+
+                width:
+                    calc(
+                        100% - 28px
+                    );
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .resume-nav-inner {
+
+                height:
+                    68px;
+            }
+
+            .resume-back-btn {
+
+                padding:
+                    9px
+                    12px;
+            }
+
+            .resume-brand {
+
+                font-size:
+                    1.05rem;
+            }
+
+            .resume-brand-icon {
+
+                width:
+                    34px;
+
+                height:
+                    34px;
+            }
+
+            .resume-card {
+
+                padding:
+                    18px;
+            }
+
+            .resume-upload-zone {
+
+                min-height:
+                    220px;
+
+                padding:
+                    25px 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="resume-page">
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <header class="resume-nav">
+
+        <div class="resume-nav-inner">
+
+
+            <div
+                class="resume-brand"
+                onclick="goToDashboard()"
+            >
+
+                <div class="resume-brand-icon">
+                    ✦
+                </div>
+
+                <span>
+                    CareerAI
+                </span>
+
+            </div>
+
+
+            <div class="resume-nav-actions">
+
+                <button
+                    type="button"
+                    class="resume-back-btn"
+                    onclick="goToDashboard()"
+                >
+                    ← Dashboard
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="resume-container">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="resume-hero">
+
+            <div class="resume-badge">
+                ✨ AI Resume Intelligence
+            </div>
+
+
+            <h1>
+
+                Turn your resume into
+
+                <span class="resume-gradient">
+                    career intelligence.
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Upload your resume and let CareerAI analyze
+                your skills, identify gaps and generate
+                personalized recommendations for your
+                target role.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FORM CARD
+        ================================================== -->
+
+        <section class="resume-card">
+
+            <form
+                id="resumeForm"
+                class="resume-form"
+                onsubmit="return false;"
+            >
+
+
+                <!-- =========================================
+                     TARGET ROLE
+                ========================================== -->
+
+                <div class="resume-form-group">
+
+                    <label
+                        for="targetRole"
+                        class="resume-label"
+                    >
+                        Target Role
+                    </label>
+
+
+                    <select
+                        id="targetRole"
+                        class="resume-select"
+                        required
+                    >
+
+                        <option value="">
+                            Select your target role
+                        </option>
+
+                        <option value="software engineer">
+                            Software Engineer
+                        </option>
+
+                        <option value="python developer">
+                            Python Developer
+                        </option>
+
+                        <option value="backend developer">
+                            Backend Developer
+                        </option>
+
+                        <option value="data analyst">
+                            Data Analyst
+                        </option>
+
+                        <option value="data scientist">
+                            Data Scientist
+                        </option>
+
+                        <option value="frontend developer">
+                            Frontend Developer
+                        </option>
+
+                    </select>
+
+
+                    <span class="resume-help">
+
+                        Choose the role you are targeting.
+                        CareerAI will compare your skills
+                        against the role requirements.
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- =========================================
+                     FILE UPLOAD
+                ========================================== -->
+
+                <div class="resume-form-group">
+
+                    <label class="resume-label">
+                        Upload Resume
+                    </label>
+
+
+                    <div
+                        class="resume-upload-zone"
+                        id="uploadZone"
+                    >
+
+                        <div class="upload-icon-large">
+                            📄
+                        </div>
+
+
+                        <h3>
+                            Upload your resume
+                        </h3>
+
+
+                        <p>
+                            PDF, DOCX or TXT files supported
+                        </p>
+
+
+                        <button
+                            type="button"
+                            id="chooseResumeButton"
+                            class="choose-file-btn"
+                        >
+                            Choose Resume
+                        </button>
+
+
+                        <input
+                            type="file"
+                            id="resumeFile"
+                            name="resumeFile"
+                            accept=".pdf,.docx,.txt"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <!-- SELECTED FILE -->
+
+                    <div
+                        class="selected-file"
+                        id="fileNameDisplay"
+                    >
+
+                        <span class="selected-file-icon">
+                            📎
+                        </span>
+
+
+                        <span id="fileNameText">
+                            No file selected
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =========================================
+                     STATUS
+                ========================================== -->
+
+                <div
+                    id="uploadStatus"
+                    class="text-muted"
+                    aria-live="polite"
+                >
+                </div>
+
+
+
+                <!-- =========================================
+                     ANALYZE BUTTON
+                ========================================== -->
+
+                <button
+                    type="submit"
+                    id="analyzeButton"
+                    class="analyze-btn"
+                >
+                    ✨ Analyze Resume
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RESULTS
+        ================================================== -->
+        <!-- =========================================================
+     JOB DESCRIPTION MATCHER
+========================================================= -->
+
+<section class="jd-matcher-section">
+
+    <div class="jd-matcher-header">
+
+        <div class="jd-badge">
+            🎯 AI Job Match
+        </div>
+
+        <h2>
+            See how well you match a real job.
+        </h2>
+
+        <p>
+            Upload an external job description and CareerAI
+            will compare it with your resume to calculate
+            your exact skill match.
+        </p>
+
+    </div>
+
+
+    <div class="jd-upload-grid">
+
+        <!-- RESUME -->
+
+        <div class="jd-upload-card">
+
+            <div class="jd-card-icon">
+                📄
+            </div>
+
+            <h3>
+                Your Resume
+            </h3>
+
+            <p>
+                Upload the resume you want to compare.
+            </p>
+
+            <label
+                for="jdResumeFile"
+                class="jd-file-button"
+            >
+                Choose Resume
+            </label>
+
+            <input
+                type="file"
+                id="jdResumeFile"
+                accept=".pdf,.docx,.txt"
+                hidden
+            >
+
+            <div
+                id="jdResumeFileName"
+                class="jd-file-name"
+            >
+                No resume selected
+            </div>
+
+        </div>
+
+
+        <!-- JOB DESCRIPTION -->
+
+        <div class="jd-upload-card">
+
+            <div class="jd-card-icon">
+                💼
+            </div>
+
+            <h3>
+                Job Description
+            </h3>
+
+            <p>
+                Upload the external job description.
+            </p>
+
+            <label
+                for="jobDescriptionFile"
+                class="jd-file-button"
+            >
+                Choose Job Description
+            </label>
+
+            <input
+                type="file"
+                id="jobDescriptionFile"
+                accept=".pdf,.docx,.txt"
+                hidden
+            >
+
+            <div
+                id="jobDescriptionFileName"
+                class="jd-file-name"
+            >
+                No job description selected
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ANALYZE BUTTON -->
+
+    <div class="jd-action-area">
+
+        <button
+            type="button"
+            id="analyzeJobButton"
+            class="analyze-job-button"
+        >
+            ✨ Analyze Job Match
+        </button>
+
+        <div
+            id="jobMatchStatus"
+            class="jd-status"
+        ></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JOB MATCH RESULT
+    ====================================================== -->
+
+    <div
+        id="jobMatchResult"
+        class="job-match-result hidden"
+    >
+
+        <div class="job-result-header">
+
+            <div>
+                <div class="jd-badge">
+                    ✨ AI Match Complete
+                </div>
+
+                <h2>
+                    Your Job Match
+                </h2>
+
+                <p>
+                    CareerAI compared your resume against
+                    the uploaded job description.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- SCORE -->
+
+        <div class="job-score-card">
+
+            <div
+                class="job-score-circle"
+                id="jobMatchScore"
+            >
+                0%
+            </div>
+
+            <div>
+
+                <h3>
+                    Job Match Score
+                </h3>
+
+                <p>
+                    How closely your skills match this
+                    job's requirements.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SKILLS -->
+
+        <div class="job-result-grid">
+
+            <div class="job-result-card">
+
+                <h3>
+                    ✅ Matched Skills
+                </h3>
+
+                <div
+                    id="jobMatchedSkills"
+                    class="skill-list"
+                ></div>
+
+            </div>
+
+
+            <div class="job-result-card">
+
+                <h3>
+                    ⚠️ Skills to Improve
+                </h3>
+
+                <div
+                    id="jobMissingSkills"
+                    class="skill-list"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESUME SKILLS -->
+
+        <div class="job-result-card">
+
+            <h3>
+                🧠 Skills Identified From Resume
+            </h3>
+
+            <div
+                id="jobResumeSkills"
+                class="skill-list"
+            ></div>
+
+        </div>
+
+
+        <!-- JOB SKILLS -->
+
+        <div class="job-result-card">
+
+            <h3>
+                💼 Skills Required By Job
+            </h3>
+
+            <div
+                id="jobRequiredSkills"
+                class="skill-list"
+            ></div>
+
+        </div>
+
+
+        <!-- RECOMMENDATIONS -->
+
+        <div class="job-recommendation-card">
+
+            <div class="recommendation-icon">
+                ✨
+            </div>
+
+            <div>
+
+                <h3>
+                    CareerAI Recommendation
+                </h3>
+
+                <ul id="jobRecommendations"></ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+        <section
+            id="resultSection"
+            class="hidden"
+        >
+
+
+            <div class="result-header">
+
+                <div class="resume-badge">
+                    ✨ AI Analysis Complete
+                </div>
+
+
+                <h2>
+                    Your Resume Intelligence
+                </h2>
+
+
+                <p>
+
+                    CareerAI analyzed your resume for
+
+                    <strong id="resultRole">
+                        your target role
+                    </strong>.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- SCORE -->
+
+            <div class="result-score-card">
+
+                <div class="score-circle">
+
+                    <span id="resumeScore">
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="score-title">
+                    Career Match Score
+                </div>
+
+            </div>
+
+
+
+            <!-- RESULT GRID -->
+
+            <div class="result-grid">
+
+
+                <!-- MATCHED -->
+
+                <div class="result-card">
+
+                    <h3>
+                        ✅ Matched Skills
+                    </h3>
+
+
+                    <div
+                        id="matchedSkills"
+                        class="skill-list"
+                    >
+                    </div>
+
+                </div>
+
+
+
+                <!-- EXTRACTED -->
+
+                <div class="result-card">
+
+                    <h3>
+                        🧠 Skills Identified
+                    </h3>
+
+
+                    <div
+                        id="extractedSkills"
+                        class="skill-list"
+                    >
+                    </div>
+
+                </div>
+
+
+
+                <!-- MISSING -->
+
+                <div class="result-card">
+
+                    <h3>
+                        ⚠️ Skills to Improve
+                    </h3>
+
+
+                    <div
+                        id="missingSkills"
+                        class="skill-list"
+                    >
+                    </div>
+
+                </div>
+
+
+
+                <!-- RECOMMENDATIONS -->
+
+                <div class="result-card recommendation-card">
+
+                    <h3>
+                        🚀 AI Recommendations
+                    </h3>
+
+
+                    <ul
+                        id="recommendationList"
+                    >
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<script>
+
+    function goToDashboard() {
+
+        window.location.href =
+            "dashboard.html";
+
+    }
+
+</script>
+
+
+
+<!-- =====================================================
+     DRAG & DROP
+===================================================== -->
+
+<!-- =====================================================
+     RESUME AI JAVASCRIPT
+===================================================== -->
+
+<script src="../js/resume.js"></script>
+
+
+</body>
+
+</html>

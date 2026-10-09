@@ -1,0 +1,516 @@
+
+/* =========================================================
+   CAREERAI — SHARED FEATURE PAGE STYLES
+   Used by Career Copilot and Interview Practice
+========================================================= */
+
+:root {
+    --feature-bg: #f5f7ff;
+    --feature-surface: #ffffff;
+    --feature-text: #172033;
+    --feature-muted: #667085;
+    --feature-primary: #6254e8;
+    --feature-primary-dark: #4939cb;
+    --feature-border: #e3e8f3;
+    --feature-success: #16794b;
+    --feature-danger: #b42318;
+    --feature-radius: 18px;
+    --feature-shadow: 0 12px 36px rgba(32, 42, 85, 0.07);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--feature-text);
+    background:
+        radial-gradient(ellipse at top left, #e9e8ff 0, transparent 38%),
+        var(--feature-bg);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Navigation */
+
+.topbar {
+    width: 100%;
+    min-height: 76px;
+    padding: 16px clamp(18px, 5vw, 76px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.86);
+    border-bottom: 1px solid rgba(227, 232, 243, 0.9);
+    backdrop-filter: blur(16px);
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--feature-text);
+    text-decoration: none;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.7px;
+}
+
+.brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    color: white;
+    background: linear-gradient(135deg, #7668ff, #4b3bd2);
+    box-shadow: 0 5px 14px rgba(98, 84, 232, 0.25);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 9px 15px;
+    border: 1px solid var(--feature-border);
+    border-radius: 11px;
+    background: white;
+    color: #344054;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 650;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-actions a:hover {
+    background: #f0efff;
+    border-color: #c7c2ff;
+    transform: translateY(-1px);
+}
+
+/* Page layout */
+
+.page {
+    width: min(1120px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 48px 0 80px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 13px;
+    color: var(--feature-primary);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.page > h1 {
+    max-width: 800px;
+    margin: 0 0 15px;
+    font-size: clamp(32px, 5vw, 49px);
+    line-height: 1.13;
+    letter-spacing: -1.7px;
+    font-weight: 800;
+}
+
+.lead {
+    max-width: 760px;
+    margin: 0 0 32px;
+    color: var(--feature-muted);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* Panels */
+
+.panel {
+    margin: 22px 0;
+    padding: clamp(20px, 3.5vw, 32px);
+    background: var(--feature-surface);
+    border: 1px solid var(--feature-border);
+    border-radius: var(--feature-radius);
+    box-shadow: var(--feature-shadow);
+    animation: featureFadeIn 0.45s ease both;
+}
+
+.panel h2 {
+    margin: 0 0 22px;
+    font-size: 23px;
+    line-height: 1.35;
+    letter-spacing: -0.5px;
+}
+
+.panel h3 {
+    margin: 20px 0 10px;
+    font-size: 17px;
+}
+
+.muted,
+.progress-note {
+    color: var(--feature-muted);
+}
+
+/* Forms */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field.full {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    color: #344054;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.field input,
+.field select,
+.field textarea,
+.answer-area {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    color: var(--feature-text);
+    background: #fbfcff;
+    border: 1px solid #d9dfeb;
+    border-radius: 11px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.field textarea,
+.answer-area {
+    min-height: 105px;
+    resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.answer-area:focus {
+    background: white;
+    border-color: var(--feature-primary);
+    box-shadow: 0 0 0 4px rgba(98, 84, 232, 0.11);
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 23px;
+}
+
+.primary-btn,
+.secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 46px;
+    padding: 12px 19px;
+    border: 1px solid transparent;
+    border-radius: 11px;
+    cursor: pointer;
+    font-weight: 750;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.primary-btn {
+    color: white;
+    background: linear-gradient(135deg, #7668ff, #5142d5);
+    box-shadow: 0 7px 18px rgba(98, 84, 232, 0.22);
+}
+
+.primary-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(98, 84, 232, 0.3);
+}
+
+.primary-btn:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.secondary-btn {
+    color: #344054;
+    background: white;
+    border-color: var(--feature-border);
+}
+
+.secondary-btn:hover {
+    background: #f4f3ff;
+    border-color: #c7c2ff;
+}
+
+/* Status messages */
+
+.status {
+    display: none;
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.status.show {
+    display: block;
+}
+
+.status.success {
+    color: var(--feature-success);
+    background: #eaf8f0;
+    border: 1px solid #c8ecd7;
+}
+
+.status.error {
+    color: var(--feature-danger);
+    background: #fff0ef;
+    border: 1px solid #ffd4d0;
+}
+
+/* Career roadmap cards */
+
+.plan-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 17px;
+}
+
+.plan-card {
+    min-width: 0;
+    padding: 21px;
+    background: linear-gradient(145deg, #ffffff, #f8f8ff);
+    border: 1px solid var(--feature-border);
+    border-radius: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.plan-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(32, 42, 85, 0.08);
+}
+
+.plan-card h3 {
+    margin-top: 0;
+}
+
+.plan-card p {
+    margin-bottom: 0;
+    color: var(--feature-muted);
+}
+
+.result-list {
+    display: grid;
+    gap: 10px;
+    padding-left: 22px;
+}
+
+.result-list li {
+    padding-left: 3px;
+    line-height: 1.7;
+}
+
+/* Interview questions */
+
+.question-card {
+    margin: 16px 0;
+    padding: 22px;
+    border: 1px solid var(--feature-border);
+    border-radius: 15px;
+    background: linear-gradient(145deg, #ffffff, #fafaff);
+}
+
+.question-card h3 {
+    margin: 0 0 10px;
+    color: var(--feature-primary);
+}
+
+.question-card p {
+    margin: 0 0 17px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.question-card label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.question-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+/* Hidden sections and accessibility */
+
+[hidden] {
+    display: none !important;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid rgba(98, 84, 232, 0.45);
+    outline-offset: 3px;
+}
+
+/* Print interview questions */
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .topbar,
+    #interviewForm,
+    #interviewStatus,
+    .question-actions,
+    #printButton,
+    .eyebrow,
+    .lead {
+        display: none !important;
+    }
+
+    .page {
+        width: 100%;
+        padding: 0;
+    }
+
+    .panel,
+    .question-card {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    .answer-area {
+        border: 1px solid #aaa;
+        background: white;
+    }
+}
+
+/* Responsive layout */
+
+@media (max-width: 700px) {
+    .topbar {
+        align-items: flex-start;
+        padding: 15px 18px;
+    }
+
+    .nav-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .page {
+        width: min(100% - 28px, 1120px);
+        padding-top: 32px;
+    }
+
+    .form-grid,
+    .plan-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+
+    .panel {
+        padding: 20px;
+    }
+
+    .page > h1 {
+        letter-spacing: -1px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+    }
+}
+
+@keyframes featureFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Copilot | CareerAI</title>
+    <link rel="stylesheet" href="../css/feature-pages.css">
+    <style>
+        .nav-actions { display:flex; gap:10px; flex-wrap:wrap; }
+        .nav-actions a {
+            display:inline-block; text-decoration:none; padding:10px 14px;
+            border:1px solid #dbe3ef; border-radius:10px; color:inherit;
+            font-weight:600; font-size:14px;
+        }
+        .nav-actions a:hover { background:#eef2ff; }
+        .plan-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px; }
+        .plan-card { padding:18px; border:1px solid #dbe3ef; border-radius:14px; background:rgba(255,255,255,.75); }
+        .plan-card h3 { margin-top:0; }
+        .progress-note { color:#64748b; font-size:14px; }
+        .primary-btn:disabled { opacity:.6; cursor:wait; }
+    </style>
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" href="../index.html">
+        <span class="brand-mark">✦</span> CareerAI
+    </a>
+    <nav class="nav-actions" aria-label="Page navigation">
+        <a href="dashboard.html">← Dashboard</a>
+        <a href="../index.html">⌂ Home</a>
+    </nav>
+</header>
+
+<main class="page">
+    <span class="eyebrow">Career Copilot</span>
+    <h1>Turn your career goal into a plan.</h1>
+    <p class="lead">
+        Choose your target role, identify skills to improve, and create a
+        practical learning roadmap with portfolio projects and interview preparation.
+    </p>
+
+    <section class="panel">
+        <h2>Build your career plan</h2>
+        <form id="careerForm">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="targetRole">Target job role</label>
+                    <input id="targetRole" required
+                           value="Python Backend Developer"
+                           placeholder="e.g. Data Analyst">
+                </div>
+
+                <div class="field">
+                    <label for="experience">Current level</label>
+                    <select id="experience">
+                        <option>Fresher</option>
+                        <option>Beginner</option>
+                        <option>Intermediate</option>
+                        <option>Experienced</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label for="skills">Your current skills</label>
+                    <textarea id="skills" required rows="4"
+                        placeholder="Python, SQL, FastAPI, Git">Python, SQL, FastAPI, Git</textarea>
+                </div>
+
+                <div class="field">
+                    <label for="hours">Study time per week</label>
+                    <select id="hours">
+                        <option value="3–5">3–5 hours</option>
+                        <option value="6–10" selected>6–10 hours</option>
+                        <option value="10–15">10–15 hours</option>
+                        <option value="15+">15+ hours</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="primary-btn" id="generateButton" type="submit">
+                    Generate My Career Plan ✨
+                </button>
+            </div>
+        </form>
+        <div id="careerStatus" class="status" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" id="careerResults" hidden>
+        <h2>Your personalized starter roadmap</h2>
+        <p id="planSummary" class="muted"></p>
+
+        <h3>Skills to prioritize</h3>
+        <ul id="skillList" class="result-list"></ul>
+
+        <h3>Four-week roadmap</h3>
+        <div id="roadmap" class="plan-grid"></div>
+
+        <h3>Portfolio project suggestion</h3>
+        <div id="projectSuggestion" class="plan-card"></div>
+
+        <p class="progress-note">
+            This is a rule-based starter plan generated from your inputs,
+            not an AI assessment or a guarantee of employment.
+        </p>
+    </section>
+</main>
+
+<script>
+"use strict";
+
+const CAREERAI_API = "http://127.0.0.1:8000";
+
+function getToken() {
+    return localStorage.getItem("access_token")
+        || localStorage.getItem("token")
+        || localStorage.getItem("jwt");
+}
+
+function showStatus(message, type = "") {
+    const element = document.getElementById("careerStatus");
+    element.textContent = message;
+    element.className = "status show" + (type ? " " + type : "");
+}
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[character]);
+}
+
+async function checkLogin() {
+    const token = getToken();
+
+    if (!token) {
+        window.location.replace("login.html");
+        return false;
+    }
+
+    try {
+        const response = await fetch(`${CAREERAI_API}/api/users/me`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("token");
+            localStorage.removeItem("jwt");
+            window.location.replace("login.html");
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error("Authentication check failed:", error);
+        showStatus("Cannot connect to CareerAI. Please start the backend and refresh.", "error");
+        return false;
+    }
+}
+
+function createCareerPlan(role, skills, level, hours) {
+    const normalized = skills.map(skill => skill.toLowerCase());
+    const priorities = [];
+
+    if (!normalized.some(skill => skill.includes("python"))) {
+        priorities.push("Python fundamentals, functions, collections and problem solving");
+    }
+
+    if (!normalized.some(skill =>
+        skill.includes("sql") || skill.includes("mysql") ||
+        skill.includes("postgres") || skill.includes("database")
+    )) {
+        priorities.push("SQL, joins, aggregation and relational database fundamentals");
+    }
+
+    if (/backend|python developer|api developer/i.test(role) &&
+        !normalized.some(skill =>
+            skill.includes("fastapi") || skill.includes("django") ||
+            skill.includes("flask")
+        )) {
+        priorities.push("A Python backend framework: FastAPI, Django or Flask");
+    }
+
+    if (!normalized.some(skill => skill.includes("git"))) {
+        priorities.push("Git, GitHub, branches and meaningful commit messages");
+    }
+
+    if (/data|analyst|scientist/i.test(role) &&
+        !normalized.some(skill => skill.includes("pandas"))) {
+        priorities.push("Pandas, data cleaning and exploratory data analysis");
+    }
+
+    if (!normalized.some(skill =>
+        skill.includes("test") || skill.includes("pytest")
+    )) {
+        priorities.push("Testing, error handling and debugging");
+    }
+
+    if (priorities.length === 0) {
+        priorities.push("Advanced practice in your target role's core skills");
+        priorities.push("Testing, deployment and code quality");
+        priorities.push("System design basics and technical interview practice");
+    }
+
+    const weeks = [
+        {
+            title: "Week 1 — Strengthen fundamentals",
+            text: `Review the essential concepts for ${role}. Practise coding or domain questions and revise weak areas.`
+        },
+        {
+            title: "Week 2 — Build a feature",
+            text: "Create one practical feature with validation, error handling, a database operation and basic tests."
+        },
+        {
+            title: "Week 3 — Finish a portfolio project",
+            text: "Build an end-to-end application, publish the code to GitHub and write a clear README with screenshots."
+        },
+        {
+            title: "Week 4 — Prepare for interviews",
+            text: "Practise technical questions, explain your project aloud and improve your resume with measurable outcomes."
+        }
+    ];
+
+    return { priorities, weeks, level, hours, role };
+}
+
+document.getElementById("careerForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const button = document.getElementById("generateButton");
+    button.disabled = true;
+
+    try {
+        const role = document.getElementById("targetRole").value.trim();
+        const skills = document.getElementById("skills").value
+            .split(/[,\n]/)
+            .map(skill => skill.trim())
+            .filter(Boolean);
+
+        if (!role || skills.length === 0) {
+            showStatus("Enter your target role and at least one skill.", "error");
+            return;
+        }
+
+        const plan = createCareerPlan(
+            role,
+            skills,
+            document.getElementById("experience").value,
+            document.getElementById("hours").value
+        );
+
+        document.getElementById("planSummary").textContent =
+            `Target role: ${plan.role} | Level: ${plan.level} | Study time: ${plan.hours} hours per week`;
+
+        document.getElementById("skillList").innerHTML =
+            plan.priorities.map(skill => `<li>${escapeHTML(skill)}</li>`).join("");
+
+        document.getElementById("roadmap").innerHTML =
+            plan.weeks.map(week => `
+                <article class="plan-card">
+                    <h3>${escapeHTML(week.title)}</h3>
+                    <p>${escapeHTML(week.text)}</p>
+                </article>
+            `).join("");
+
+        document.getElementById("projectSuggestion").innerHTML = `
+            <h3>${escapeHTML(role)} Portfolio Project</h3>
+            <p>Build a role-focused application with authentication, database
+            persistence, input validation, automated tests, API documentation
+            and a deployment guide. Include screenshots and a clear README.</p>
+            <p><strong>Skills to demonstrate:</strong>
+            ${escapeHTML(skills.join(", "))}</p>
+        `;
+
+        document.getElementById("careerResults").hidden = false;
+        showStatus("Your career roadmap is ready.", "success");
+        document.getElementById("careerResults").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    } catch (error) {
+        console.error(error);
+        showStatus("Unable to generate the plan. Please try again.", "error");
+    } finally {
+        button.disabled = false;
+    }
+});
+
+document.addEventListener("DOMContentLoaded", checkLogin);
+</script>
+</body>
+</html>

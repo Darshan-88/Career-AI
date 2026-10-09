@@ -1,0 +1,1040 @@
+/* =========================================================
+   CAREERAI - EXTERNAL JOB MATCH
+   Standalone page styling
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: #10182f;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(75, 120, 255, 0.10),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(124, 58, 237, 0.10),
+            transparent 32%
+        ),
+        #f8faff;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.jm-navbar {
+    height: 80px;
+
+    padding: 0 8%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    border-bottom: 1px solid #e7ebf4;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    backdrop-filter: blur(16px);
+}
+
+.jm-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+    color: #10182f;
+
+    font-size: 1.45rem;
+
+    font-weight: 800;
+}
+
+.jm-brand-icon {
+    width: 42px;
+
+    height: 42px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 12px;
+
+    color: white;
+
+    font-size: 1.2rem;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 8px 20px
+        rgba(37, 99, 235, 0.22);
+}
+
+.jm-dashboard-btn {
+    text-decoration: none;
+
+    color: #18213a;
+
+    padding: 12px 20px;
+
+    border-radius: 12px;
+
+    border: 1px solid #dfe5ef;
+
+    background: white;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.jm-dashboard-btn:hover {
+    transform: translateY(-2px);
+
+    border-color: #bfc9dd;
+
+    box-shadow:
+        0 8px 22px
+        rgba(20, 30, 60, 0.08);
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.jm-page {
+    width: min(1120px, 92%);
+
+    margin: auto;
+
+    padding: 75px 0 100px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.jm-hero {
+    text-align: center;
+
+    max-width: 850px;
+
+    margin: 0 auto 55px;
+}
+
+.jm-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    color: #2563eb;
+
+    background: rgba(239, 246, 255, 0.9);
+
+    border: 1px solid #cfe0ff;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+
+    margin-bottom: 22px;
+}
+
+.jm-hero h1 {
+    font-size: clamp(
+        2.8rem,
+        6vw,
+        4.8rem
+    );
+
+    line-height: 1.02;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 850;
+}
+
+.jm-hero h1 span {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+.jm-hero p {
+    max-width: 720px;
+
+    margin: 24px auto 0;
+
+    color: #5b6b88;
+
+    font-size: 1.08rem;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.jm-card {
+    background: white;
+
+    border: 1px solid #e1e7f1;
+
+    border-radius: 28px;
+
+    padding: 42px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(28, 48, 90, 0.09);
+}
+
+.jm-card-header {
+    margin-bottom: 32px;
+}
+
+.jm-eyebrow {
+    color: #2563eb;
+
+    font-size: 0.75rem;
+
+    letter-spacing: 0.12em;
+
+    font-weight: 800;
+}
+
+.jm-card-header h2 {
+    margin-top: 8px;
+
+    font-size: 1.75rem;
+
+    letter-spacing: -0.025em;
+}
+
+.jm-card-header p {
+    margin-top: 8px;
+
+    color: #71809c;
+}
+
+
+/* =========================================================
+   UPLOAD GRID
+========================================================= */
+
+.jm-upload-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+}
+
+.jm-upload-box {
+    min-height: 300px;
+
+    padding: 32px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 2px dashed #d4def0;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fbfcff,
+            #f7faff
+        );
+
+    transition: 0.25s ease;
+}
+
+.jm-upload-box:hover {
+    border-color: #7da5ff;
+
+    background: #f8faff;
+
+    transform: translateY(-2px);
+}
+
+.jm-upload-icon {
+    width: 64px;
+
+    height: 64px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 18px;
+
+    font-size: 1.7rem;
+
+    margin-bottom: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8f0ff,
+            #eef0ff
+        );
+}
+
+.jm-jd-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #ede9fe,
+            #e8edff
+        );
+}
+
+.jm-upload-box h3 {
+    font-size: 1.25rem;
+
+    margin-bottom: 7px;
+}
+
+.jm-upload-box p {
+    color: #71809c;
+
+    font-size: 0.92rem;
+
+    margin-bottom: 20px;
+}
+
+.jm-upload-button {
+    border: none;
+
+    cursor: pointer;
+
+    padding: 12px 20px;
+
+    border-radius: 11px;
+
+    color: #2563eb;
+
+    background: #eaf1ff;
+
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.jm-upload-button:hover {
+    background: #dce8ff;
+
+    transform: translateY(-1px);
+}
+
+.jm-selected-file {
+    width: 100%;
+
+    margin-top: 18px;
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    background: white;
+
+    border: 1px solid #e3e9f3;
+
+    color: #7b89a2;
+
+    font-size: 0.84rem;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.jm-selected-file.selected {
+    color: #2563eb;
+
+    font-weight: 700;
+
+    border-color: #cbdcff;
+
+    background: #f5f8ff;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.jm-status {
+    min-height: 24px;
+
+    margin: 25px 0 15px;
+
+    text-align: center;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+}
+
+.jm-status.success {
+    color: #159447;
+}
+
+.jm-status.error {
+    color: #dc3c4a;
+}
+
+.jm-status.loading {
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   ANALYZE BUTTON
+========================================================= */
+
+.jm-analyze-button {
+    width: 100%;
+
+    border: none;
+
+    cursor: pointer;
+
+    padding: 17px 25px;
+
+    border-radius: 14px;
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 750;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 14px 30px
+        rgba(54, 82, 225, 0.24);
+
+    transition: 0.2s ease;
+}
+
+.jm-analyze-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 18px 36px
+        rgba(54, 82, 225, 0.30);
+}
+
+.jm-analyze-button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.jm-results {
+    margin-top: 85px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.jm-result-header {
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.jm-result-header h2 {
+    font-size: clamp(
+        2.2rem,
+        5vw,
+        3.5rem
+    );
+
+    letter-spacing: -0.045em;
+
+    margin-bottom: 12px;
+}
+
+.jm-result-header p {
+    color: #667693;
+
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   SCORE CARD
+========================================================= */
+
+.jm-score-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 55px;
+
+    padding: 48px;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f2f6ff,
+            #f6f2ff
+        );
+
+    border: 1px solid #dce5ff;
+
+    margin-bottom: 25px;
+}
+
+.jm-score-ring {
+    --score: 0%;
+
+    width: 190px;
+
+    height: 190px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        conic-gradient(
+            #2563eb var(--score),
+            #dbe5f5 0
+        );
+}
+
+.jm-score-inner {
+    width: 145px;
+
+    height: 145px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: white;
+}
+
+.jm-score-inner strong {
+    font-size: 2.5rem;
+
+    letter-spacing: -0.05em;
+}
+
+.jm-score-inner span {
+    color: #8290a9;
+
+    font-size: 0.85rem;
+
+    margin-top: 2px;
+}
+
+.jm-score-content {
+    flex: 1;
+}
+
+.jm-score-label {
+    color: #2563eb;
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+.jm-score-content h3 {
+    font-size: 1.65rem;
+
+    margin: 10px 0;
+}
+
+.jm-score-content p {
+    color: #6b7a94;
+
+    line-height: 1.65;
+
+    max-width: 600px;
+}
+
+
+/* =========================================================
+   RESULTS GRID
+========================================================= */
+
+.jm-results-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+
+    margin-bottom: 24px;
+}
+
+.jm-result-card {
+    background: white;
+
+    border: 1px solid #e0e6f0;
+
+    border-radius: 22px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(25, 42, 75, 0.055);
+}
+
+.jm-full-card {
+    margin-bottom: 24px;
+}
+
+.jm-result-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    margin-bottom: 22px;
+}
+
+.jm-result-title h3 {
+    font-size: 1.1rem;
+}
+
+.jm-result-icon {
+    width: 34px;
+
+    height: 34px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 10px;
+
+    font-weight: 800;
+}
+
+.jm-result-icon.success {
+    color: #139c58;
+
+    background: #e8f9ef;
+}
+
+.jm-result-icon.warning {
+    color: #d17b00;
+
+    background: #fff4db;
+}
+
+.jm-result-icon.purple {
+    color: #7c3aed;
+
+    background: #f0eaff;
+}
+
+.jm-result-icon.blue {
+    color: #2563eb;
+
+    background: #e8f0ff;
+}
+
+
+/* =========================================================
+   SKILL TAGS
+========================================================= */
+
+.jm-skills {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+.jm-skill {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 8px 13px;
+
+    border-radius: 999px;
+
+    font-size: 0.82rem;
+
+    font-weight: 700;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+}
+
+.jm-skill.matched {
+    background: #eaf9f0;
+
+    color: #168b4c;
+}
+
+.jm-skill.missing {
+    background: #fff2df;
+
+    color: #bd7000;
+}
+
+.jm-empty {
+    color: #8995aa;
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   RECOMMENDATIONS
+========================================================= */
+
+.jm-recommendation-card {
+    padding: 32px;
+
+    border-radius: 24px;
+
+    border: 1px solid #d9d0ff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7f4ff,
+            #f1f6ff
+        );
+
+    margin-top: 10px;
+}
+
+.jm-recommendation-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 24px;
+}
+
+.jm-recommendation-heading > span {
+    width: 48px;
+
+    height: 48px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 14px;
+
+    font-size: 1.25rem;
+
+    background: #e9e2ff;
+}
+
+.jm-recommendation-heading h3 {
+    margin-top: 4px;
+
+    font-size: 1.25rem;
+}
+
+.jm-recommendations {
+    list-style: none;
+
+    display: grid;
+
+    gap: 12px;
+}
+
+.jm-recommendations li {
+    position: relative;
+
+    padding: 15px 18px 15px 45px;
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    color: #4f5d76;
+
+    line-height: 1.55;
+}
+
+.jm-recommendations li::before {
+    content: "✓";
+
+    position: absolute;
+
+    left: 17px;
+
+    top: 14px;
+
+    width: 20px;
+
+    height: 20px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: white;
+
+    background: #2563eb;
+
+    font-size: 0.7rem;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.jm-secondary-button {
+    display: block;
+
+    margin: 30px auto 0;
+
+    padding: 13px 22px;
+
+    border-radius: 12px;
+
+    border: 1px solid #dce3ee;
+
+    background: white;
+
+    color: #26324b;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.jm-secondary-button:hover {
+    border-color: #b9c7dd;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(30, 45, 70, 0.08);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .jm-navbar {
+        padding: 0 5%;
+
+        height: 72px;
+    }
+
+    .jm-page {
+        padding-top: 50px;
+    }
+
+    .jm-card {
+        padding: 25px;
+
+        border-radius: 22px;
+    }
+
+    .jm-upload-grid,
+    .jm-results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .jm-score-card {
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 30px;
+
+        padding: 35px 25px;
+    }
+
+    .jm-score-content p {
+        margin: auto;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .jm-brand {
+        font-size: 1.2rem;
+    }
+
+    .jm-brand-icon {
+        width: 36px;
+
+        height: 36px;
+    }
+
+    .jm-dashboard-btn {
+        padding: 9px 12px;
+
+        font-size: 0.82rem;
+    }
+
+    .jm-page {
+        width: 94%;
+    }
+
+    .jm-hero h1 {
+        font-size: 2.6rem;
+    }
+
+    .jm-card {
+        padding: 18px;
+    }
+
+    .jm-upload-box {
+        padding: 25px 15px;
+    }
+
+    .jm-score-ring {
+        width: 160px;
+
+        height: 160px;
+    }
+
+    .jm-score-inner {
+        width: 122px;
+
+        height: 122px;
+    }
+}
