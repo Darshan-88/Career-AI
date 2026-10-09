@@ -13,6 +13,10 @@ from backend.app.models.resume import Resume
 from backend.app.models.analysis import ResumeAnalysis
 
 
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
@@ -25,6 +29,22 @@ app = FastAPI(
     ),
     version=APP_VERSION,
 )
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://career-ai-zeta-dusky.vercel.app",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+
 
 
 # ============================================================
