@@ -30,6 +30,20 @@ app = FastAPI(
     version=APP_VERSION,
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://career-ai-zeta-dusky.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+
+
+
 
 app.add_middleware(
     CORSMiddleware,
